@@ -1,0 +1,10 @@
+site_name: UCLCSSA API Documentation
+theme:
+  name: 'material'
+  logo: 
+    icon: 'account_balance'
+  palette:
+    primary: 'red'
+    accent: 'pink'
+  feature:
+    tabs: true
