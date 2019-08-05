@@ -9,6 +9,8 @@ repo_url: 'https://github.com/UCLCSSA/API-Documentation'
 nav:
   - Home: index.md
   - Versioning: versioning.md
+  - Authentication and Authorization: authentication-and-authorization.md
+  - Information Protection: information-protection.md
 
 # Theme
 theme:
