@@ -47,5 +47,5 @@ made.
 
     ```http
     GET /posts HTTP/1.1
-    Accept: application/vnd.uclcssa.v3+json
+    Accept: application/vnd.uclcssa.v1+json
     ```
