@@ -16,8 +16,8 @@ added.
 ## Versioning in Requests
 
 Versioning of UCLCSSA API is achieved through *custom media types*. In requests,
-only the MAJOR version should be specified, with `v` prepended to the MAJOR 
-version (i.e. `v3`).
+only the MAJOR version should be specified, with `v` prepended to the MAJOR
+version (i.e. `v1`).
 
 Custom version information can be added to `Accept` header when a request is
 made.
