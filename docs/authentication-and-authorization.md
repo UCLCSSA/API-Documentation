@@ -62,6 +62,77 @@ UCLCSSA API utilizes a **two-tiered** registration system.
 
 ### WeChat Registration
 
+**Tier 1** registration. Users who complete the WeChat registration process will be
+able to perform basic functionalities (such as forum interactions and posting)
+as well as WeChat-specific functionalities.
+
+!!! info "WeChat MiniProgram Login"
+    See [MiniProgram Login](https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/login.html).
+
+    The WeChat client shall invoke `#!js wx.login()` to obtain a temporary
+    `code`, which shall be passed along to UCLCSSA API.
+
+!!! note "`POST /register/wechat`"
+    !!! warning "Authorization"
+        `none`
+
+    **Request Body**:
+    
+    ```typescript
+    {
+        appId: string,
+        appSecret: string,
+        code: string
+    }
+    ```
+
+    | Key | Type | Description | Constraints | Default | Required |
+    | --------- | ---- | ----------- | ----------- | ------- | -------- |
+    | `appId` | `string` | Obtained from WeChat client. | N/A | N/A | Yes |
+    | `appSecret` | `string` | Obtained from WeChat client. | N/A | N/A | Yes |
+    | `code` | `string` | Obtained from WeChat client. | N/A | N/A | Yes |
+
+    ---
+
+    !!! success
+        Successful registration.
+
+        **Status Code**: `200 OK`
+
+        **Response Body**:
+
+        ```json
+        {
+            "uclcssaSessionKey": "UCLCSSASESSIONKEY"
+        }
+        ```
+
+        | Key | Type | Description |
+        | --- | ---- | ----------- |
+        | `uclcssaSessionKey` | `string` | Key representing a user session. |
+
+    !!! failure "Missing post body"
+        **Status Code**: `400 Bad Request`
+
+        **Response Body**:
+
+        ```json
+        {
+            "message": "Bad request: missing { appId, appSecret, code }."
+        }
+        ```
+    
+    !!! failure "Missing required key(s)"
+        **Status Code**: `400 Bad Request`
+
+        **Response Body**:
+
+        ```json
+        {
+            "message": "Bad request: missing one or more of { appId, appSecret, code }."
+        }
+        ```
+
 ### UCLAPI Registration
 
 ### Logging Out
@@ -73,6 +144,8 @@ invalidating his/her session. After logging out, the user's associated WeChat
 !!! note "`POST /logout`"
     !!! warning "Authorization"
         `wechat-registered` OR `uclapi-registered`
+
+    ---
 
     !!! success
         **Status Code**: `200 OK`

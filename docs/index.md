@@ -25,6 +25,10 @@ A typical endpoint is documentated in the following format:
     well (the tier of authorization required is either `wechat-registered`,
     `uclapi-registered` or `none`).
 
+    If the only required header is the `Authorization` header, it will be 
+    specified in the Authorization section explicitly and will not be placed
+    in a separate Request Header(s) section.
+
     !!! warning "Authorization"
         `wechat-registered`
 
@@ -51,6 +55,8 @@ A typical endpoint is documentated in the following format:
     | `keyA` | `string` | Hello World. | Not empty. | `''` | No |
     | `nestedGroup.xxx` | `int` | Hello World. | `>= 0` | `0` | No |
     | `nestedGroup.yyy` | `int[]` | Numbers. | Length `>= 0` | `[]` | Yes |
+
+    ---
 
     !!! success "Successful response"
         Info on successful response. The HTTP status code, as well as any
