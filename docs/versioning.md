@@ -49,3 +49,29 @@ made.
     GET /posts HTTP/1.1
     Accept: application/vnd.uclcssa.v1+json
     ```
+
+## Versioning in Responses
+
+All responses returned from UCLCSSA API will include the `Content-Type` header,
+which will include the custom media type with version information and payload
+format.
+
+!!! example "Typical Responses"
+
+    ```http
+    HTTP/1.1 200 OK
+    Content-Type: application/vnd.uclcssa.v1+json
+
+    {
+        "message": "Successfully logged out."
+    }
+    ```
+
+    ```http
+    HTTP/1.1 400 Bad Request
+    Content-Type: application/vnd.uclcssa.v1+json
+
+    {
+        "message": "Missing Authorization header."
+    }
+    ```
