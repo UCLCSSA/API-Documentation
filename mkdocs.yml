@@ -21,7 +21,7 @@ theme:
     primary: 'red'
     accent: 'pink'
   feature:
-    tabs: true
+    tabs: false
 
 # Markdown extensions
 markdown_extensions:
