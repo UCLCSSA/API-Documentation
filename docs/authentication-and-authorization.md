@@ -72,7 +72,7 @@ invalidating his/her session. After logging out, the user's associated WeChat
 
 !!! note "`POST /logout`"
     !!! warning "Authorization"
-        Required. :white_check_mark:
+        `wechat-registered` OR `uclapi-registered`
 
     !!! success
         **Status Code**: `200 OK`

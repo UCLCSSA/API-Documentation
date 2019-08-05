@@ -20,8 +20,13 @@ A typical endpoint is documentated in the following format:
     Info regarding this endpoint. The `HTTP_METHOD` is one of `GET`, `POST`,
     `PUT` or `DELETE`, e.g. `GET /posts`. For query parameters, they are
     documented in the **Query Parameter(s)** section. If the method is `POST`,
-    the requirements of the post body will be documented in **Request Body** 
-    section.
+    the requirements of the post body will be documented in **Request Body**
+    section. If the endpoint requires authorization, it shall be specified as
+    well (the tier of authorization required is either `wechat-registered`,
+    `uclapi-registered` or `none`).
+
+    !!! warning "Authorization"
+        `wechat-registered`
 
     **Query Parameter(s)**:
 
