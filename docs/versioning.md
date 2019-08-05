@@ -54,9 +54,11 @@ made.
 
 All responses returned from UCLCSSA API will include the `Content-Type` header,
 which will include the custom media type with version information and payload
-format. Hence, all endpoints will omit the `Content-Type` header. If a endpoint
-does not specify a `Content-Type`, it is assumed to be exactly
-`application/vnd.uclcssa.v1+json`.
+format. Hence, all endpoints will omit the `Content-Type` header.
+
+!!! info
+    If a endpoint does not specify a `Content-Type` in its documentation, it
+    shall be assumed to be exactly `application/vnd.uclcssa.v1+json`.
 
 !!! example "Typical Responses"
 
