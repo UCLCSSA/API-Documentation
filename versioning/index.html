@@ -440,9 +440,12 @@ which may contain breaking changes.</p>
 <h2 id="versioning-in-responses">Versioning in Responses<a class="headerlink" href="#versioning-in-responses" title="Permanent link">&para;</a></h2>
 <p>All responses returned from UCLCSSA API will include the <code>Content-Type</code> header,
 which will include the custom media type with version information and payload
-format. Hence, all endpoints will omit the <code>Content-Type</code> header. If a endpoint
-does not specify a <code>Content-Type</code>, it is assumed to be exactly
-<code>application/vnd.uclcssa.v1+json</code>.</p>
+format. Hence, all endpoints will omit the <code>Content-Type</code> header.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>If a endpoint does not specify a <code>Content-Type</code> in its documentation, it
+shall be assumed to be exactly <code>application/vnd.uclcssa.v1+json</code>.</p>
+</div>
 <div class="admonition example">
 <p class="admonition-title">Typical Responses</p>
 <div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
