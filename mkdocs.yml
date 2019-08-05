@@ -1,10 +1,49 @@
-site_name: UCLCSSA API Documentation
+# Site information
+site_name: 'UCLCSSA API Documentation'
+
+# Repository information
+repo_name: 'UCLCSSA/API-Documentation'
+repo_url: 'https://github.com/UCLCSSA/API-Documentation'
+
+# Theme
 theme:
   name: 'material'
+  language: 'en'
   logo: 
     icon: 'account_balance'
   palette:
     primary: 'red'
     accent: 'pink'
+  text: 'Ubuntu'
+  code: 'Ubuntu Mono'
   feature:
     tabs: true
+
+# Markdown extensions
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
+  - meta
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+# JavaScript
+extra_javascript:
+  - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
