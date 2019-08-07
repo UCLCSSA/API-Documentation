@@ -28,6 +28,6 @@ happen because `uclcssaSessionKey` is either expired or invalid.
 
     ```json
     {
-        "error": "@forbidden/uclcssa-session-key-expired"
+        "error": "@forbidden/invalid-uclcssa-session-key"
     }
     ```

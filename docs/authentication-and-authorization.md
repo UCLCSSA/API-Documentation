@@ -111,17 +111,6 @@ as well as WeChat-specific functionalities.
         | --- | ---- | ----------- |
         | `uclcssaSessionKey` | `string` | Key representing a user session. |
 
-    !!! failure "Missing POST body"
-        **Status Code**: `400 Bad Request`
-
-        **Response Body**:
-
-        ```json
-        {
-            "error": "@bad-request/missing-body"
-        }
-        ```
-    
     !!! failure "Missing required key(s)"
         **Status Code**: `400 Bad Request`
 
@@ -129,7 +118,7 @@ as well as WeChat-specific functionalities.
 
         ```json
         {
-            "error": "Bad request: missing one or more of { appId, appSecret, code }."
+            "error": "@bad-request/missing-required-keys"
         }
         ```
 
@@ -173,7 +162,7 @@ that a valid `uclcssaSessionKey` is required.
 
         ```json
         {
-            "error": "@bad-request/missing-email"
+            "error": "@bad-request/missing-required-keys"
         }
         ```
 

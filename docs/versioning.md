@@ -65,10 +65,6 @@ format. Hence, all endpoints will omit the `Content-Type` header.
     ```http
     HTTP/1.1 200 OK
     Content-Type: application/vnd.uclcssa.v1+json
-
-    {
-        "message": "Successfully logged out."
-    }
     ```
 
     ```http
@@ -76,6 +72,6 @@ format. Hence, all endpoints will omit the `Content-Type` header.
     Content-Type: application/vnd.uclcssa.v1+json
 
     {
-        "message": "Missing Authorization header."
+        "error": "@bad-request/missing-authorization-header"
     }
     ```
