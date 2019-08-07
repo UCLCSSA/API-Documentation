@@ -111,14 +111,14 @@ as well as WeChat-specific functionalities.
         | --- | ---- | ----------- |
         | `uclcssaSessionKey` | `string` | Key representing a user session. |
 
-    !!! failure "Missing post body"
+    !!! failure "Missing POST body"
         **Status Code**: `400 Bad Request`
 
         **Response Body**:
 
         ```json
         {
-            "message": "Bad request: missing { appId, appSecret, code }."
+            "error": "@bad-request/missing-body"
         }
         ```
     
@@ -129,11 +129,77 @@ as well as WeChat-specific functionalities.
 
         ```json
         {
-            "message": "Bad request: missing one or more of { appId, appSecret, code }."
+            "error": "Bad request: missing one or more of { appId, appSecret, code }."
         }
         ```
 
 ### UCLAPI Registration
+
+**Tier 2** registration. Users who upgrade to the `uclapi-registered` tier must
+already have the `wechat-registered` tier, that is, already registered through
+WeChat.
+
+The user may begin registering for UCLAPI by calling `/register/uclapi`. Note
+that a valid `uclcssaSessionKey` is required.
+
+!!! note "`POST /register/uclapi`"
+    !!! warning "Authorization"
+        `wechat-registered`
+
+    **Request body**:
+
+    ```typescript
+    {
+        email: string
+    }
+    ```
+
+    | Key | Type | Description | Constraints | Default | Required |
+    | --------- | ---- | ----------- | ----------- | ------- | -------- |
+    | `email` | `string` | Email to send confirmation to. | Valid email address. | N/A | Yes |
+
+    ---
+
+    !!! success
+        Successful request. A confirmation email will be sent to the specified
+        address.
+
+        **Status Code**: `200 OK`
+
+    !!! failure "Missing required email"
+        **Status Code**: `400 Bad Request`
+
+        **Response Body**:
+
+        ```json
+        {
+            "error": "@bad-request/missing-email"
+        }
+        ```
+
+    !!! failure "Invalid email address"
+        **Status Code**: `400 Bad Request`
+
+        **Response Body**:
+
+        ```json
+        {
+            "error": "@bad-request/invalid-email"
+        }
+        ```
+
+    !!! failure "Missing `Authorization` header"
+        Missing `Authorization` header.
+
+        **Status Code**: `400 Bad Request`
+
+        **Response Body**:
+
+        ```json
+        {
+            "error": "@bad-request/missing-authorization-header"
+        }
+        ```
 
 ### Logging Out
 
@@ -150,7 +216,7 @@ invalidating his/her session. After logging out, the user's associated WeChat
     !!! success
         **Status Code**: `200 OK`
     
-    !!! failure "Missing header"
+    !!! failure "Missing `Authorization` header"
         Missing `Authorization` header.
 
         **Status Code**: `400 Bad Request`
@@ -159,7 +225,7 @@ invalidating his/her session. After logging out, the user's associated WeChat
 
         ```json
         {
-            "message": "Missing required Authorization header."
+            "error": "@bad-request/missing-authorization-header"
         }
         ```
     
@@ -173,7 +239,7 @@ invalidating his/her session. After logging out, the user's associated WeChat
 
         ```json
         {
-            "message": "Invalid uclcssaSessionKey."
+            "error": "@forbidden/invalid-uclcssa-session-key"
         }
         ```
 
