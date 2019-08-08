@@ -34,9 +34,9 @@ A typical endpoint is documentated in the following format:
 
     **Query Parameter(s)**:
 
-    | Parameter | Type | Description | Constraints | Default | Required |
-    | --------- | ---- | ----------- | ----------- | ------- | -------- |
-    | `query_parameter` | `int` | Some non-negative int. | `> 0 && <= 100` | `1` | Yes |
+    | Parameter         | Type  | Description            | Constraints     | Default | Required |
+    | ----------------- | ----- | ---------------------- | --------------- | ------- | -------- |
+    | `query_parameter` | `int` | Some non-negative int. | `> 0 && <= 100` | `1`     | Yes      |
 
     **Request Body**:
 
@@ -50,11 +50,11 @@ A typical endpoint is documentated in the following format:
     }
     ```
 
-    | Key | Type | Description | Constraints | Default | Required |
-    | --------- | ---- | ----------- | ----------- | ------- | -------- |
-    | `keyA` | `string` | Hello World. | Not empty. | `''` | No |
-    | `nestedGroup.xxx` | `int` | Hello World. | `>= 0` | `0` | No |
-    | `nestedGroup.yyy` | `int[]` | Numbers. | Length `>= 0` | `[]` | Yes |
+    | Key               | Type     | Description  | Constraints   | Default | Required |
+    | ----------------- | -------- | ------------ | ------------- | ------- | -------- |
+    | `keyA`            | `string` | Hello World. | Not empty.    | `''`    | No       |
+    | `nestedGroup.xxx` | `int`    | Hello World. | `>= 0`        | `0`     | No       |
+    | `nestedGroup.yyy` | `int[]`  | Numbers.     | Length `>= 0` | `[]`    | Yes      |
 
     ---
 
