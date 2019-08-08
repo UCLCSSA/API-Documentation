@@ -238,7 +238,7 @@ valid for *30 minutes*.
         **Response Header(s)**:
 
         ```http
-        Location: https://uclapi.com/oauth/authorize?client_id={clientId}&state={openId}
+        Location: https://uclapi.com/oauth/authorize?client_id=...&state=...
         ```
 
     !!! failure "Missing `uclapiRegistrationCode`"
