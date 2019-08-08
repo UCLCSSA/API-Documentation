@@ -659,6 +659,146 @@ address.</p>
 
 </div>
 </div>
+<p>The <code>email</code> does not necessarily have to be an UCL email, since the user will
+have to login through their UCL credentials anyway. Also note that
+<code>uclcssaSessionKey</code> here is only valid if the user has previously registered
+through the WeChat registration process.</p>
+<p>The API will send a registration email to the user, containing a link to the
+<code>GET /authorize/uclapi</code> endpoint. Each <code>uclapiRegistrationCode</code> is issued to
+track UCLAPI registration process, with each <code>uclapiRegistrationCode</code> being
+valid for <em>30 minutes</em>.</p>
+<div class="admonition note">
+<p class="admonition-title"><code>GET /authorize/uclapi?uclapiRegistrationCode=...</code></p>
+<div class="admonition warning">
+<p class="admonition-title"><code>Authorization</code></p>
+<p><code>none</code></p>
+</div>
+<p><strong>Query Parameters(s)</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uclapiRegistrationCode</code></td>
+<td><code>string</code></td>
+<td>A registration code issued by the API to track registration process.</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition danger">
+<p class="admonition-title">Cache control</p>
+<p>To protect users, any requests made to this endpoint <strong>must not</strong> be
+cached by the client.</p>
+<p>The API will return a set of headers requiring the client to invalidate
+any caches of this <code>GET</code> request, which the client <strong>shall</strong> respect:</p>
+<div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">301</span> <span class="ne">Redirect</span>
+<span class="na">Cache-Control</span><span class="o">:</span> <span class="l">no-cache, no-store, must-revalidate</span>
+<span class="na">Pragma</span><span class="o">:</span> <span class="l">no-cache</span>
+<span class="na">Expires</span><span class="o">:</span> <span class="l">0</span>
+</pre></div>
+
+</div>
+<hr />
+<div class="admonition success">
+<p class="admonition-title">Redirect to UCLAPI</p>
+<p>Redirects the user to UCLAPI's <code>https://uclapi.com/oauth/authorize</code>
+endpoint, with query parameters:</p>
+<ul>
+<li><code>client_id</code> as provided by API</li>
+<li><code>state</code> being the user's WeChat <code>openId</code> for tracking.</li>
+</ul>
+<p><strong>Status Code</strong>: <code>301 Redirect</code></p>
+<p><strong>Response Header(s)</strong>:</p>
+<div class="codehilite"><pre><span></span><span class="err">Location: https://uclapi.com/oauth/authorize?client_id=...&amp;state=...</span>
+</pre></div>
+
+</div>
+<div class="admonition failure">
+<p class="admonition-title">Missing <code>uclapiRegistrationCode</code></p>
+<p><strong>Status Code</strong>: <code>400 Bad Request</code></p>
+<p><strong>Response Body</strong>:</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;@bad-request/missing-required-query-parameters&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+<div class="admonition failure">
+<p class="admonition-title">Invalid <code>uclapiRegistrationCode</code></p>
+<p>The user's <code>uclapiRegistrationCode</code> may be expired or invalid.</p>
+<p><strong>Status Code</strong>: <code>403 Forbidden</code></p>
+<p><strong>Response Body</strong>:</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;@forbidden/invalid-uclapi-registration-code&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+<p>If the user agrees to authorize UCLCSSA API to retrieve his/her information
+on his/her behalf by loggin in through the user's UCL credentials, UCLAPI will
+call the provided callback URL at <code>GET /authorize/uclapi/callback</code>.</p>
+<div class="admonition note">
+<p class="admonition-title"><code>GET /authorize/uclapi/callback?client_id=...&amp;state=...&amp;result=...&amp;code=...</code></p>
+<p>This endpoint only serves to interface with UCLAPI. Clients may not use this
+endpoint. UCLAPI is whitelisted as origin. See <a href="https://uclapi.com/docs/#oauth/meta">UCLAPI OAuth#meta</a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Authorization</p>
+<p><code>none</code></p>
+</div>
+<p><strong>Query Parameters</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>client_id</code></td>
+<td><code>string</code></td>
+<td>UCLCSSA API <code>client_id</code>.</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td><code>string</code></td>
+<td>User's WeChat <code>openId</code>.</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>client_secret</code></td>
+<td><code>string</code></td>
+<td>UCLCSSA API <code>client_secret</code></td>
+<td>Yes*</td>
+</tr>
+<tr>
+<td><code>code</code></td>
+<td><code>string</code></td>
+<td>Voucher to obtain <code>uclapiToken</code>.</td>
+<td>Yes*</td>
+</tr>
+</tbody>
+</table>
+<p>* If user denies authorization, <code>client_secret</code> and <code>code</code> will be missing.
+However, since this endpoint interfaces with UCLAPI, it returns 200 OK to
+recognize that the callback endpoint is in fact successfully invoked.</p>
+<hr />
+<div class="admonition success">
+<p class="admonition-title">Callback URL invoked</p>
+<p><strong>Status Code</strong>: <code>200 OK</code></p>
+</div>
+</div>
 <h3 id="logging-out">Logging Out<a class="headerlink" href="#logging-out" title="Permanent link">&para;</a></h3>
 <p>A user may choose to terminate his/her session. This can be achieved by
 invalidating his/her session. After logging out, the user's associated WeChat
