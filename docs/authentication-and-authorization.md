@@ -86,11 +86,11 @@ as well as WeChat-specific functionalities.
     }
     ```
 
-    | Key | Type | Description | Constraints | Default | Required |
-    | --------- | ---- | ----------- | ----------- | ------- | -------- |
-    | `appId` | `string` | Obtained from WeChat client. | N/A | N/A | Yes |
-    | `appSecret` | `string` | Obtained from WeChat client. | N/A | N/A | Yes |
-    | `code` | `string` | Obtained from WeChat client. | N/A | N/A | Yes |
+    | Key         | Type     | Description                  | Constraints | Default | Required |
+    | ----------- | -------- | ---------------------------- | ----------- | ------- | -------- |
+    | `appId`     | `string` | Obtained from WeChat client. | N/A         | N/A     | Yes      |
+    | `appSecret` | `string` | Obtained from WeChat client. | N/A         | N/A     | Yes      |
+    | `code`      | `string` | Obtained from WeChat client. | N/A         | N/A     | Yes      |
 
     ---
 
@@ -107,8 +107,8 @@ as well as WeChat-specific functionalities.
         }
         ```
 
-        | Key | Type | Description |
-        | --- | ---- | ----------- |
+        | Key                 | Type     | Description                      |
+        | ------------------- | -------- | -------------------------------- |
         | `uclcssaSessionKey` | `string` | Key representing a user session. |
 
     !!! failure "Missing required key(s)"
@@ -143,9 +143,9 @@ that a valid `uclcssaSessionKey` is required.
     }
     ```
 
-    | Key | Type | Description | Constraints | Default | Required |
-    | --------- | ---- | ----------- | ----------- | ------- | -------- |
-    | `email` | `string` | Email to send confirmation to. | Valid email address. | N/A | Yes |
+    | Key     | Type     | Description                    | Constraints          | Default | Required |
+    | ------- | -------- | ------------------------------ | -------------------- | ------- | -------- |
+    | `email` | `string` | Email to send confirmation to. | Valid email address. | N/A     | Yes      |
 
     ---
 
