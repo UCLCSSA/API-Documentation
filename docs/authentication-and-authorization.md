@@ -190,6 +190,110 @@ that a valid `uclcssaSessionKey` is required.
         }
         ```
 
+The `email` does not necessarily have to be an UCL email, since the user will
+have to login through their UCL credentials anyway. Also note that
+`uclcssaSessionKey` here is only valid if the user has previously registered
+through the WeChat registration process.
+
+The API will send a registration email to the user, containing a link to the
+`GET /authorize/uclapi` endpoint. Each `uclapiRegistrationCode` is issued to
+track UCLAPI registration process, with each `uclapiRegistrationCode` being
+valid for *30 minutes*.
+
+!!! note "`GET /authorize/uclapi?uclapiRegistrationCode=...`"
+    !!! warning "`Authorization`"
+        `none`
+
+    **Query Parameters(s)**:
+
+    | Parameter                | Type     | Description                                                          | Required |
+    | ------------------------ | -------- | -------------------------------------------------------------------- | -------- |
+    | `uclapiRegistrationCode` | `string` | A registration code issued by the API to track registration process. | Yes      |
+
+    !!! danger "Cache control"
+        To protect users, any requests made to this endpoint **must not** be
+        cached by the client.
+
+        The API will return a set of headers requiring the client to invalidate
+        any caches of this `GET` request, which the client **shall** respect:
+
+        ```http
+        HTTP/1.1 301 Redirect
+        Cache-Control: no-cache, no-store, must-revalidate
+        Pragma: no-cache
+        Expires: 0
+        ```
+
+    ---
+
+    !!! success "Redirect to UCLAPI"
+        Redirects the user to UCLAPI's `https://uclapi.com/oauth/authorize`
+        endpoint, with query parameters:
+
+        - `client_id` as provided by API
+        - `state` being the user's WeChat `openId` for tracking.
+        
+        **Status Code**: `301 Redirect`
+
+        **Response Header(s)**:
+
+        ```http
+        Location: https://uclapi.com/oauth/authorize?client_id={clientId}&state={openId}
+        ```
+
+    !!! failure "Missing `uclapiRegistrationCode`"
+        **Status Code**: `400 Bad Request`
+
+        **Response Body**:
+
+        ```json
+        {
+            "error": "@bad-request/missing-required-query-parameters"
+        }
+        ```
+
+    !!! failure "Invalid `uclapiRegistrationCode`"
+        The user's `uclapiRegistrationCode` may be expired or invalid.
+
+        **Status Code**: `403 Forbidden`
+
+        **Response Body**:
+
+        ```json
+        {
+            "error": "@forbidden/invalid-uclapi-registration-code"
+        }
+        ```
+
+If the user agrees to authorize UCLCSSA API to retrieve his/her information
+on his/her behalf by loggin in through the user's UCL credentials, UCLAPI will
+call the provided callback URL at `GET /authorize/uclapi/callback`.
+
+!!! note "`GET /authorize/uclapi/callback?client_id=...&state=...&result=...&code=...`"
+    This endpoint only serves to interface with UCLAPI. Clients may not use this
+    endpoint. UCLAPI is whitelisted as origin. See [UCLAPI OAuth#meta](https://uclapi.com/docs/#oauth/meta).
+
+    !!! warning "Authorization"
+        `none`
+
+    **Query Parameters**:
+
+    | Parameter       | Type     | Description                      | Required |
+    | --------------- | -------- | -------------------------------- | -------- |
+    | `client_id`     | `string` | UCLCSSA API `client_id`.         | Yes      |
+    | `state`         | `string` | User's WeChat `openId`.          | Yes      |
+    | `client_secret` | `string` | UCLCSSA API `client_secret`      | Yes\*    |
+    | `code`          | `string` | Voucher to obtain `uclapiToken`. | Yes\*    |
+
+    \* If user denies authorization, `client_secret` and `code` will be missing.
+    However, since this endpoint interfaces with UCLAPI, it returns 200 OK to
+    recognize that the callback endpoint is in fact successfully invoked.
+
+    ---
+
+    !!! success "Callback URL invoked"
+        **Status Code**: `200 OK`
+
 ### Logging Out
 
 A user may choose to terminate his/her session. This can be achieved by
