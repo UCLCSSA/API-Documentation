@@ -298,6 +298,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../error-reporting/" title="Error Reporting" class="md-nav__link">
+      Error Reporting
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../authentication-and-authorization/" title="Authentication and Authorization" class="md-nav__link">
       Authentication and Authorization
     </a>
@@ -426,17 +438,13 @@ shall be assumed to be exactly <code>application/vnd.uclcssa.v1+json</code>.</p>
 <p class="admonition-title">Typical Responses</p>
 <div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/vnd.uclcssa.v1+json</span>
-
-<span class="p">{</span>
-    <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Successfully logged out.&quot;</span>
-<span class="p">}</span>
 </pre></div>
 
 <div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">400</span> <span class="ne">Bad Request</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/vnd.uclcssa.v1+json</span>
 
 <span class="p">{</span>
-    <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Missing Authorization header.&quot;</span>
+    <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;@bad-request/missing-authorization-header&quot;</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -476,13 +484,13 @@ shall be assumed to be exactly <code>application/vnd.uclcssa.v1+json</code>.</p>
           </a>
         
         
-          <a href="../authentication-and-authorization/" title="Authentication and Authorization" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../error-reporting/" title="Error Reporting" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Authentication and Authorization
+                Error Reporting
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

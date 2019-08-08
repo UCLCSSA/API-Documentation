@@ -244,6 +244,18 @@
       
       
 
+
+  <li class="md-nav__item">
+    <a href="../error-reporting/" title="Error Reporting" class="md-nav__link">
+      Error Reporting
+    </a>
+  </li>
+
+    
+      
+      
+      
+
   
 
 
@@ -558,27 +570,95 @@ as well as WeChat-specific functionalities.</p>
 </table>
 </div>
 <div class="admonition failure">
-<p class="admonition-title">Missing post body</p>
-<p><strong>Status Code</strong>: <code>400 Bad Request</code></p>
-<p><strong>Response Body</strong>:</p>
-<div class="codehilite"><pre><span></span><span class="p">{</span>
-    <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Bad request: missing { appId, appSecret, code }.&quot;</span>
-<span class="p">}</span>
-</pre></div>
-
-</div>
-<div class="admonition failure">
 <p class="admonition-title">Missing required key(s)</p>
 <p><strong>Status Code</strong>: <code>400 Bad Request</code></p>
 <p><strong>Response Body</strong>:</p>
 <div class="codehilite"><pre><span></span><span class="p">{</span>
-    <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Bad request: missing one or more of { appId, appSecret, code }.&quot;</span>
+    <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;@bad-request/missing-required-keys&quot;</span>
 <span class="p">}</span>
 </pre></div>
 
 </div>
 </div>
 <h3 id="uclapi-registration">UCLAPI Registration<a class="headerlink" href="#uclapi-registration" title="Permanent link">&para;</a></h3>
+<p><strong>Tier 2</strong> registration. Users who upgrade to the <code>uclapi-registered</code> tier must
+already have the <code>wechat-registered</code> tier, that is, already registered through
+WeChat.</p>
+<p>The user may begin registering for UCLAPI by calling <code>/register/uclapi</code>. Note
+that a valid <code>uclcssaSessionKey</code> is required.</p>
+<div class="admonition note">
+<p class="admonition-title"><code>POST /register/uclapi</code></p>
+<div class="admonition warning">
+<p class="admonition-title">Authorization</p>
+<p><code>wechat-registered</code></p>
+</div>
+<p><strong>Request body</strong>:</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">email</span>: <span class="kt">string</span>
+<span class="p">}</span>
+</pre></div>
+
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+<th>Constraints</th>
+<th>Default</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>email</code></td>
+<td><code>string</code></td>
+<td>Email to send confirmation to.</td>
+<td>Valid email address.</td>
+<td>N/A</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="admonition success">
+<p class="admonition-title">Success</p>
+<p>Successful request. A confirmation email will be sent to the specified
+address.</p>
+<p><strong>Status Code</strong>: <code>200 OK</code></p>
+</div>
+<div class="admonition failure">
+<p class="admonition-title">Missing required email</p>
+<p><strong>Status Code</strong>: <code>400 Bad Request</code></p>
+<p><strong>Response Body</strong>:</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;@bad-request/missing-required-keys&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+<div class="admonition failure">
+<p class="admonition-title">Invalid email address</p>
+<p><strong>Status Code</strong>: <code>400 Bad Request</code></p>
+<p><strong>Response Body</strong>:</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;@bad-request/invalid-email&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+<div class="admonition failure">
+<p class="admonition-title">Missing <code>Authorization</code> header</p>
+<p>Missing <code>Authorization</code> header.</p>
+<p><strong>Status Code</strong>: <code>400 Bad Request</code></p>
+<p><strong>Response Body</strong>:</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;@bad-request/missing-authorization-header&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
 <h3 id="logging-out">Logging Out<a class="headerlink" href="#logging-out" title="Permanent link">&para;</a></h3>
 <p>A user may choose to terminate his/her session. This can be achieved by
 invalidating his/her session. After logging out, the user's associated WeChat
@@ -595,12 +675,12 @@ invalidating his/her session. After logging out, the user's associated WeChat
 <p><strong>Status Code</strong>: <code>200 OK</code></p>
 </div>
 <div class="admonition failure">
-<p class="admonition-title">Missing header</p>
+<p class="admonition-title">Missing <code>Authorization</code> header</p>
 <p>Missing <code>Authorization</code> header.</p>
 <p><strong>Status Code</strong>: <code>400 Bad Request</code></p>
 <p><strong>Response Body</strong>:</p>
 <div class="codehilite"><pre><span></span><span class="p">{</span>
-    <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Missing required Authorization header.&quot;</span>
+    <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;@bad-request/missing-authorization-header&quot;</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -612,7 +692,7 @@ invalid or expired.</p>
 <p><strong>Status Code</strong>: <code>403 Forbidden</code></p>
 <p><strong>Response Body</strong>:</p>
 <div class="codehilite"><pre><span></span><span class="p">{</span>
-    <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Invalid uclcssaSessionKey.&quot;</span>
+    <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;@forbidden/invalid-uclcssa-session-key&quot;</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -648,7 +728,7 @@ the API can find a matching user session.</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../versioning/" title="Versioning" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../error-reporting/" title="Error Reporting" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -657,7 +737,7 @@ the API can find a matching user session.</p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Versioning
+                Error Reporting
               </span>
             </div>
           </a>

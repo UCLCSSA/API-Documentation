@@ -31,18 +31,18 @@
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
-      <link rel="shortcut icon" href="/assets/images/favicon.png">
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
     
     
       
-        <title>UCLCSSA API Documentation</title>
+        <title>Error Reporting - UCLCSSA API Documentation</title>
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/application.0284f74d.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.0284f74d.css">
       
-        <link rel="stylesheet" href="/assets/stylesheets/application-palette.01803549.css">
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.01803549.css">
       
       
         
@@ -51,7 +51,7 @@
       
     
     
-      <script src="/assets/javascripts/modernizr.74668098.js"></script>
+      <script src="../assets/javascripts/modernizr.74668098.js"></script>
     
     
       
@@ -60,7 +60,7 @@
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
-    <link rel="stylesheet" href="/assets/fonts/material-icons.css">
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
     
     
     
@@ -85,12 +85,16 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
+      <a href="#error-reporting" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="/." title="UCLCSSA API Documentation" class="md-header-nav__button md-logo">
+        <a href=".." title="UCLCSSA API Documentation" class="md-header-nav__button md-logo">
           
             <i class="md-icon">account_balance</i>
           
@@ -107,7 +111,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                
+                Error Reporting
               
             </span>
           
@@ -182,7 +186,7 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="/." title="UCLCSSA API Documentation" class="md-nav__button md-logo">
+    <a href=".." title="UCLCSSA API Documentation" class="md-nav__button md-logo">
       
         <i class="md-icon">account_balance</i>
       
@@ -218,7 +222,7 @@
 
 
   <li class="md-nav__item">
-    <a href="/." title="Home" class="md-nav__link">
+    <a href=".." title="Home" class="md-nav__link">
       Home
     </a>
   </li>
@@ -230,7 +234,7 @@
 
 
   <li class="md-nav__item">
-    <a href="/versioning/" title="Versioning" class="md-nav__link">
+    <a href="../versioning/" title="Versioning" class="md-nav__link">
       Versioning
     </a>
   </li>
@@ -240,11 +244,20 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-    <a href="/error-reporting/" title="Error Reporting" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+    <a href="./" title="Error Reporting" class="md-nav__link md-nav__link--active">
       Error Reporting
     </a>
+    
   </li>
 
     
@@ -254,7 +267,7 @@
 
 
   <li class="md-nav__item">
-    <a href="/authentication-and-authorization/" title="Authentication and Authorization" class="md-nav__link">
+    <a href="../authentication-and-authorization/" title="Authentication and Authorization" class="md-nav__link">
       Authentication and Authorization
     </a>
   </li>
@@ -267,12 +280,60 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
               
-  <h1>404 - Not found</h1>
+                
+                  <a href="https://github.com/UCLCSSA/API-Documentation/edit/master/docs/error-reporting.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="error-reporting">Error Reporting<a class="headerlink" href="#error-reporting" title="Permanent link">&para;</a></h1>
+<p>To make using UCLCSSA API as pleasent as possible, all API endpoints strive to
+have a uniform error reporting format.</p>
+<p>Firstly, HTTP status codes are used semantically to convey success or failure.
+Any 2XX codes shall indicate successful request. Any 4XX codes shall indicate
+failure. Any 5XX codes shall indicate unexpected errors.</p>
+<p>For 4XX errors, such as <code>400 Bad Request</code>, <code>403 Forbidden</code>, any endpoints
+returning those status codes shall return a JSON response containing a detailed
+<code>error</code>.</p>
+<p>An <code>error</code> is a short string of the format <code>@http-status/detailed-error-type</code>.
+For example, missing the <code>Authorization</code> header in a request made to a protected
+endpoint will give an <code>error</code> of <code>@bad-request/missing-authorization-header</code>.</p>
+<p>The client may choose to check <code>error</code> for detailed error causes, as
+<code>400 Bad Request</code> may happen due to different reasons, and <code>403 Forbidden</code> may
+happen because <code>uclcssaSessionKey</code> is either expired or invalid.</p>
+<div class="admonition info">
+<p class="admonition-title">Typical Error Response</p>
+<div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/vnd.uclcssa.v1+json</span>
+</pre></div>
 
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;@forbidden/invalid-uclcssa-session-key&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+                
+                  
+                
+              
               
                 
 
@@ -285,6 +346,41 @@
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../versioning/" title="Versioning" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Versioning
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../authentication-and-authorization/" title="Authentication and Authorization" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Authentication and Authorization
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -303,9 +399,9 @@
       
     </div>
     
-      <script src="/assets/javascripts/application.245445c6.js"></script>
+      <script src="../assets/javascripts/application.245445c6.js"></script>
       
-      <script>app.initialize({version:"1.0.4",url:{base:"/"}})</script>
+      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       
