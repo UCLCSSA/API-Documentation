@@ -121,6 +121,17 @@ as well as WeChat-specific functionalities.
             "error": "@bad-request/missing-required-keys"
         }
         ```
+    
+    !!! failure "Failed to authenticate via WeChat"
+        **Status Code**: `401 Unauthorized`
+
+        **Response Body**:
+
+        ```json
+        {
+            "error": "@unauthorized/failed-wechat-authentication"
+        }
+        ```
 
 ### UCLAPI Registration
 
@@ -180,13 +191,13 @@ that a valid `uclcssaSessionKey` is required.
     !!! failure "Missing `Authorization` header"
         Missing `Authorization` header.
 
-        **Status Code**: `400 Bad Request`
+        **Status Code**: `403 Forbidden`
 
         **Response Body**:
 
         ```json
         {
-            "error": "@bad-request/missing-authorization-header"
+            "error": "@forbidden/missing-authorization-header"
         }
         ```
 
@@ -255,13 +266,13 @@ valid for *30 minutes*.
     !!! failure "Invalid `uclapiRegistrationCode`"
         The user's `uclapiRegistrationCode` may be expired or invalid.
 
-        **Status Code**: `403 Forbidden`
+        **Status Code**: `401 Unauthorized`
 
         **Response Body**:
 
         ```json
         {
-            "error": "@forbidden/invalid-uclapi-registration-code"
+            "error": "@unauthorized/invalid-uclapi-registration-code"
         }
         ```
 
@@ -312,13 +323,13 @@ invalidating his/her session. After logging out, the user's associated WeChat
     !!! failure "Missing `Authorization` header"
         Missing `Authorization` header.
 
-        **Status Code**: `400 Bad Request`
+        **Status Code**: `403 Forbidden`
 
         **Response Body**:
 
         ```json
         {
-            "error": "@bad-request/missing-authorization-header"
+            "error": "@forbidden/missing-authorization-header"
         }
         ```
     
@@ -326,13 +337,13 @@ invalidating his/her session. After logging out, the user's associated WeChat
         The provided `uclcssaSessionKey` does not exist in records. It may be
         invalid or expired.
 
-        **Status Code**: `403 Forbidden`
+        **Status Code**: `401 Unauthorized`
 
         **Response Body**:
 
         ```json
         {
-            "error": "@forbidden/invalid-uclcssa-session-key"
+            "error": "@unauthorized/invalid-uclcssa-session-key"
         }
         ```
 
