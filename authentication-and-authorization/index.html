@@ -579,6 +579,16 @@ as well as WeChat-specific functionalities.</p>
 </pre></div>
 
 </div>
+<div class="admonition failure">
+<p class="admonition-title">Failed to authenticate via WeChat</p>
+<p><strong>Status Code</strong>: <code>401 Unauthorized</code></p>
+<p><strong>Response Body</strong>:</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;@unauthorized/failed-wechat-authentication&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
 </div>
 <h3 id="uclapi-registration">UCLAPI Registration<a class="headerlink" href="#uclapi-registration" title="Permanent link">&para;</a></h3>
 <p><strong>Tier 2</strong> registration. Users who upgrade to the <code>uclapi-registered</code> tier must
@@ -650,10 +660,10 @@ address.</p>
 <div class="admonition failure">
 <p class="admonition-title">Missing <code>Authorization</code> header</p>
 <p>Missing <code>Authorization</code> header.</p>
-<p><strong>Status Code</strong>: <code>400 Bad Request</code></p>
+<p><strong>Status Code</strong>: <code>403 Forbidden</code></p>
 <p><strong>Response Body</strong>:</p>
 <div class="codehilite"><pre><span></span><span class="p">{</span>
-    <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;@bad-request/missing-authorization-header&quot;</span>
+    <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;@forbidden/missing-authorization-header&quot;</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -733,10 +743,10 @@ endpoint, with query parameters:</p>
 <div class="admonition failure">
 <p class="admonition-title">Invalid <code>uclapiRegistrationCode</code></p>
 <p>The user's <code>uclapiRegistrationCode</code> may be expired or invalid.</p>
-<p><strong>Status Code</strong>: <code>403 Forbidden</code></p>
+<p><strong>Status Code</strong>: <code>401 Unauthorized</code></p>
 <p><strong>Response Body</strong>:</p>
 <div class="codehilite"><pre><span></span><span class="p">{</span>
-    <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;@forbidden/invalid-uclapi-registration-code&quot;</span>
+    <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;@unauthorized/invalid-uclapi-registration-code&quot;</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -817,10 +827,10 @@ invalidating his/her session. After logging out, the user's associated WeChat
 <div class="admonition failure">
 <p class="admonition-title">Missing <code>Authorization</code> header</p>
 <p>Missing <code>Authorization</code> header.</p>
-<p><strong>Status Code</strong>: <code>400 Bad Request</code></p>
+<p><strong>Status Code</strong>: <code>403 Forbidden</code></p>
 <p><strong>Response Body</strong>:</p>
 <div class="codehilite"><pre><span></span><span class="p">{</span>
-    <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;@bad-request/missing-authorization-header&quot;</span>
+    <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;@forbidden/missing-authorization-header&quot;</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -829,10 +839,10 @@ invalidating his/her session. After logging out, the user's associated WeChat
 <p class="admonition-title">Invalid <code>uclcssaSessionKey</code></p>
 <p>The provided <code>uclcssaSessionKey</code> does not exist in records. It may be
 invalid or expired.</p>
-<p><strong>Status Code</strong>: <code>403 Forbidden</code></p>
+<p><strong>Status Code</strong>: <code>401 Unauthorized</code></p>
 <p><strong>Response Body</strong>:</p>
 <div class="codehilite"><pre><span></span><span class="p">{</span>
-    <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;@forbidden/invalid-uclcssa-session-key&quot;</span>
+    <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;@unauthorized/invalid-uclcssa-session-key&quot;</span>
 <span class="p">}</span>
 </pre></div>
 
